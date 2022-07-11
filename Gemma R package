@@ -1,0 +1,18 @@
+#devtools::install_github('PavlidisLab/gemmaAPI.R')
+#devtools<-install_github('PavlidisLab/gemmaAPI.R')
+#Did not work
+if (!requireNamespace("devtools", quietly = TRUE)) {
+  install.packages("devtools")
+}
+devtools::install_github("PavlidisLab/gemma.R")
+
+Antidepressant<-gemma.R::searchDatasets("Antidepressant", limit=100)
+write.table(x=Antidepressant, file="Antidepressant Search result.txt", sep="*")
+getwd()
+#setwd("~/Desktop/Coursera")
+str(Antidepressant)
+Fluoxetine<-gemma.R::searchDatasets("Fluoxetine", limit=100)
+
+CombinedDF<-rbind.data.frame(Antidepressant, Fluoxetine)
+sum(unique(CombinedDF$ee.ShortName))
+CombinedDFunique<-unique(CombinedDF)
